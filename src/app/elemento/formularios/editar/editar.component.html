@@ -1,0 +1,75 @@
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+  <div class="container-fluid">
+    <a class="navbar-brand ms-5" (click)="irConTipo('')">Coleccion</a>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <button class="nav-link" (click)="irConTipo('anime')">Anime</button>
+        </li>
+        <li class="nav-item">
+          <button class="nav-link" (click)="irConTipo('series')">Series</button>
+        </li>
+        <li class="nav-item">
+          <button class="nav-link" (click)="irConTipo('peliculas')">Peliculas</button>
+        </li>
+        <li class="nav-item dropdown">
+          <button class="nav-link" (click)="irConTipo('juegos')">Juegos</button>
+        </li>
+      </ul>
+    </div>
+    <div>
+      <button class="btn btn-outline-primary me-5" routerLink="/nuevo">Nuevo</button>
+    </div>
+  </div>
+</nav>
+<div class="d-flex flex-wrap justify-content-center">
+  <div class="">
+    <div class="row">
+      <div class="col">
+        <img [src]="imagen(elemento.caratula)" alt="Imagen" style="max-width: 35rem;">
+      </div>
+      <div class="col">
+        <form (ngSubmit)="editar()" novalidate #f="ngForm">
+          <div class="card m-4 " style="max-width: 40rem;">
+            <div class="form-group text-center m-3">
+              <input style="max-width: 30rem;" type="text" class="form-control card-title text-center fs-1 m-4"
+                name="nombre" id="nombre" [(ngModel)]="elemento.nombre" required>
+            </div>
+            <div class="form-floating">
+              <textarea class="form-control" name="descripcion" id="descripcion" style="height: 100px"
+                [(ngModel)]="elemento.descrip"></textarea>
+            </div>
+            <div class="row mt-3">
+              <div class="col-5">
+                <div class="form-group">
+                  <input type="text" class="form-control" name="obs" id="obs" [(ngModel)]="elemento.obs" required>
+                </div>
+              </div>
+              <div class="col-5">
+                <div class="form-group">
+                  <select class="form-control" name="tipo" id="tipo" [(ngModel)]="elemento.tipo" required>
+                    <option value="ANIME">ANIME</option>
+                    <option value="JUEGOS">JUEGOS</option>
+                    <option value="PELICULAS">PELICULAS</option>
+                    <option value="SERIES">SERIES</option>
+                    <option value="ANULADO">ANULADO</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-2">
+                <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">
+                  <input type="checkbox" class="btn-check" name="esta" id="esta" autocomplete="off"
+                    [(ngModel)]="elemento.esta">
+                  <label class="btn btn-outline-primary" for="esta">Está?</label>
+                </div>
+              </div>
+              <div class="card-body">
+                <button class="btn btn-outline-primary" tooltip=""> Guardar </button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

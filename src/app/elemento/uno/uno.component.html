@@ -1,0 +1,61 @@
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+  <div class="container-fluid">
+    <a class="navbar-brand ms-5" (click)="irConTipo('')">Coleccion</a>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <button class="nav-link" (click)="irConTipo('anime')">Anime</button>
+        </li>
+        <li class="nav-item">
+          <button class="nav-link" (click)="irConTipo('series')">Series</button>
+        </li>
+        <li class="nav-item">
+          <button class="nav-link" (click)="irConTipo('peliculas')">Peliculas</button>
+        </li>
+        <li class="nav-item dropdown">
+          <button class="nav-link" (click)="irConTipo('juegos')">Juegos</button>
+        </li>
+      </ul>
+    </div>
+    <div>
+      <button class="btn btn-outline-primary me-5" routerLink="/nuevo">Nuevo</button>
+    </div>
+  </div>
+</nav>
+<div class="d-flex justify-content-center">
+  <div class="">
+    <div class="card m-4 " style="width: 40rem;">
+      <h5 class="card-title text-center fs-1 m-4">{{ elemento.nombre }}</h5>
+      <img [src]="imagen(elemento.caratula)" alt="Imagen" >
+      <div class="card-body">
+        <div class="d-flex mb-3">
+          <button class="btn btn-outline-primary p-2" routerLink="/editar/{{elemento.id}}" tooltip=""> Editar </button>
+          <button class="btn btn-outline-primary ms-2 p-2" (click)="openModal(img)"> + Imagenes </button>
+          <button class="btn btn-outline-warning ms-auto p-2" (click)="openModal(delete)"> Borrar </button>
+        </div>
+      </div>
+      <p class="card-text m-4">{{ elemento.descrip }}</p>
+      <p class="card-text ms-5">{{ elemento.obs }}</p>
+    </div>
+  </div>
+</div>
+<div class="d-flex justify-content-center m-4" *ngFor="let imagenes of elemento.imagenesPaths">
+  <img [src]="imagen(imagenes)" alt="Imagen" style="max-width: 45rem;">
+</div>
+
+<ng-template #delete>
+  <div class="modal-body text-center">
+    <p>Estas seguro?</p>
+    <button type="button" class="btn btn-danger me-2" (click)="borrar(elemento.id!)">Si</button>
+    <button type="button" class="btn btn-primary" (click)="decline()">No</button>
+  </div>
+</ng-template>
+
+<ng-template #img>
+  <div class="modal-body text-center">
+    <p>Agregar Imagenes</p>
+    <input type="file" (change)="onFileSelected($event)" multiple />
+
+    <button class="btn btn-outline-dark mt-3" (click)="agregarImagen()">Agregar Imágenes</button>
+  </div>
+</ng-template>

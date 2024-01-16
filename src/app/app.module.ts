@@ -13,6 +13,7 @@ import { ElementoComponent } from './elemento/elemento.component';
 import { NuevoComponent } from './elemento/formularios/nuevo/nuevo.component';
 import { EditarComponent } from './elemento/formularios/editar/editar.component';
 import { UnoComponent } from './elemento/uno/uno.component';
+import { PaginationModule } from 'ngx-bootstrap/pagination';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { UnoComponent } from './elemento/uno/uno.component';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    MaterialModule
+    MaterialModule,
+    PaginationModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

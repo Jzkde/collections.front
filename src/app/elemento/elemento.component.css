@@ -5,4 +5,9 @@
   {
     transform: rotate(315deg);
   }
- 
+  .paginador {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    z-index: 1000; /* Ajusta según sea necesario para evitar conflictos de z-index */
+  }

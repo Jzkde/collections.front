@@ -13,12 +13,14 @@ export class ElementoComponent implements OnInit {
   elemento: elemento[] = []
   buscados: any[] = [];
   returnedArray?: any[];
+  currentPage: number = 1
 
   busqueda = {
     nombre: '',
     obs: '',
     descrip: '',
     tipo: '',
+    esta: true
   };
 
   constructor(
@@ -40,7 +42,7 @@ export class ElementoComponent implements OnInit {
       data => {
         this.buscados = data;
         this.buscados = this.buscados.map((obj: any, i: number) => ({ obj }));
-        this.returnedArray = this.buscados.slice(0, 10);      
+        this.returnedArray = this.buscados.slice(0, 10);
       }
     );
   }
@@ -54,12 +56,13 @@ export class ElementoComponent implements OnInit {
   filtrarPorTipo(tipo: string): void {
     this.busqueda.tipo = tipo;
     this.filtro();
+    this.currentPage = 1;
   }
-  
+
   // Cambia la pagina
   pageChanged(event: PageChangedEvent): void {
     const startItem = (event.page - 1) * event.itemsPerPage;
     const endItem = event.page * event.itemsPerPage;
-    this.returnedArray = this.buscados.slice(startItem, endItem);  
+    this.returnedArray = this.buscados.slice(startItem, endItem);
   }
 }

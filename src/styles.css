@@ -10,3 +10,12 @@ body {
   background-image: url("./assets/fondo2.jpg");
   
 }
+.menu {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000; /* Ajusta según sea necesario para evitar conflictos de z-index */
+}
+.cuerpo{
+  margin-top: 105px;
+}

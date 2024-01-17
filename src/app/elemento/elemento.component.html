@@ -1,57 +1,58 @@
 <div class="row">
   <div class="col-xs-12 col-12">
     <div class="content-wrapper">
-<div class="conteiner">
-  <nav class="navbar navbar-expand-lg bg-body-tertiary">
-    <div class="container-fluid">
-      <a class="navbar-brand ms-5" (click)="filtrarPorTipo('')">Coleccion</a>
-      <div class="collapse navbar-collapse" id="navbarNavDropdown">
-        <ul class="navbar-nav">
-          <li class="nav-item">
-            <button class="nav-link" (click)="filtrarPorTipo('anime')"> Anime</button>
-          </li>
-          <li class="nav-item">
-            <button class="nav-link" (click)="filtrarPorTipo('series')">Series</button>
-          </li>
-          <li class="nav-item">
-            <button class="nav-link" (click)="filtrarPorTipo('peliculas')">Peliculas</button>
-          </li>
-          <li class="nav-item dropdown">
-            <button class="nav-link" (click)="filtrarPorTipo('juegos')">Juegos</button>
-          </li>
-        </ul>
-      </div>
-      <div>
-        <button class="btn btn-outline-primary me-5" routerLink="/nuevo">Nuevo</button>
-      </div>
-      <div>
-        <form class="d-flex" role="search">
-          <div class="input-group">
-            <input type="text" class="form-control" name="clienteNombre" id="clienteNombre"
-              [(ngModel)]="busqueda.nombre" (input)="filtro()">
+      <nav class="navbar navbar-expand-lg bg-body-tertiary menu">
+        <div class="container-fluid">
+          <a class="navbar-brand ms-5" (click)="filtrarPorTipo('')">Coleccion</a>
+          <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <button class="nav-link" (click)="filtrarPorTipo('anime')"> Anime</button>
+              </li>
+              <li class="nav-item">
+                <button class="nav-link" (click)="filtrarPorTipo('series')">Series</button>
+              </li>
+              <li class="nav-item">
+                <button class="nav-link" (click)="filtrarPorTipo('peliculas')">Peliculas</button>
+              </li>
+              <li class="nav-item dropdown">
+                <button class="nav-link" (click)="filtrarPorTipo('juegos')">Juegos</button>
+              </li>
+            </ul>
           </div>
-          <button class="btn btn-outline-success" type="submit">Buscar</button>
-        </form>
-      </div>
-    </div>
-  </nav>
- 
-        <div class="d-flex flex-wrap justify-content-center">
-          <div class="card m-4" style="width: 20rem;" *ngFor="let elemento of returnedArray">
-            <img [src]="imagen(elemento.obj.caratula)" alt="Imagen" tooltip="{{elemento.obj.descrip}}" placement="right"
-              routerLink="/uno/{{elemento.obj.id}}">
-            <div class="badge bg-danger position-absolute top-0 start-0 rotate">{{elemento.obj.tipo}}</div>
-            <div *ngIf="!elemento.obj.esta" class="badge bg-danger position-absolute top-50 start-50 translate-middle fs-3">
-              Falta
-            </div>
-            <div class="card-body">
-              <h5 class="card-title">{{ elemento.obj.nombre }}</h5>
-              <p class="card-text">{{ elemento.obj.obs }}</p>
-            </div>
+          <div>
+            <mat-slide-toggle class="me-4"  [(ngModel)]="busqueda.esta" (change)="filtro()" >Esta?</mat-slide-toggle>
+            <button class="btn btn-outline-primary me-5" routerLink="/nuevo">Nuevo</button>
+          </div>
+          <div>
+            <form class="d-flex" role="search">
+              <div class="input-group">
+                <input type="text" class="form-control" name="clienteNombre" id="clienteNombre"
+                  [(ngModel)]="busqueda.nombre" (input)="filtro()">
+              </div>
+              <button class="btn btn-outline-success" type="submit">Buscar</button>
+            </form>
+          </div>
+        </div>
+      </nav>
+
+      <div class="d-flex flex-wrap justify-content-center cuerpo">
+        <div class="card m-4" style="width: 20rem;" *ngFor="let elemento of returnedArray">
+          <img [src]="imagen(elemento.obj.caratula)" alt="Imagen" tooltip="{{elemento.obj.descrip}}" placement="right"
+            routerLink="/uno/{{elemento.obj.id}}">
+          <div class="badge bg-danger position-absolute top-0 start-0 rotate">{{elemento.obj.tipo}}</div>
+          <div *ngIf="!elemento.obj.esta"
+            class="badge bg-danger position-absolute top-50 start-50 translate-middle fs-3">
+            Falta
+          </div>
+          <div class="card-body">
+            <h5 class="card-title">{{ elemento.obj.nombre }}</h5>
+            <p class="card-text">{{ elemento.obj.obs }}</p>
           </div>
         </div>
       </div>
     </div>
-    <pagination [totalItems]="buscados.length" (pageChanged)="pageChanged($event)"></pagination>
+    <pagination class="paginador" [totalItems]="buscados.length" [(ngModel)]="currentPage"
+      (pageChanged)="pageChanged($event)"></pagination>
   </div>
 </div>

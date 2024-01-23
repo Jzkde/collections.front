@@ -5,4 +5,5 @@ export interface Busqueda {
     descrip: String;
     tipo: String;
     esta?: boolean;
+    backup?: string;
 }

@@ -35,7 +35,11 @@
         </div>
       </div>
       <p class="card-text m-4">{{ elemento.descrip }}</p>
-      <p class="card-text ms-5">{{ elemento.obs }}</p>
+      <div  class="d-flex justify-content-between">
+        <p class="card-text ms-5">{{ elemento.obs }} <span *ngIf="elemento.backup">+ Disco Rigido</span></p>
+        <p  *ngIf="codigo" >|</p>
+        <p *ngIf="codigo" class="card-text me-5">Codigo: {{elemento.cod}}</p>
+      </div>
     </div>
   </div>
 </div>

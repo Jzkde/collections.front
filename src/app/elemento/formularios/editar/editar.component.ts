@@ -27,12 +27,15 @@ export class EditarComponent implements OnInit {
       obs: '',
       tipo: '',
       caratula: '',
+      cod: '',
+      backup: ''
     }
 
     const id = this.activatedRoute.snapshot.params['id'];
     this.elementosService.uno(id).subscribe(
       data => {
         this.elemento = data;
+        //console.log(data);
       });
   }
 

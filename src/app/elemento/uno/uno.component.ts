@@ -15,6 +15,7 @@ export class UnoComponent implements OnInit {
   modalRef?: BsModalRef;
   id = this.activatedRoute.snapshot.params['id'];
   imagenes: File[] = [];
+  codigo!: boolean;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -31,13 +32,20 @@ export class UnoComponent implements OnInit {
       obs: '',
       tipo: '',
       caratula: '',
+      backup: '',
+      cod: ''
     }
 
     this.elementosService.uno(this.id).subscribe(
       data => {
         this.elemento = data;
+        if (data.cod ) {
+          this.codigo = true
+        }
       }
     );
+
+
   }
 
 

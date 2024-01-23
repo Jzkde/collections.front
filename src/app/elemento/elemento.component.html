@@ -21,6 +21,7 @@
             </ul>
           </div>
           <div>
+            <mat-slide-toggle class="me-4"  [(ngModel)]="busqueda.backup" (change)="filtro()" >Tiene copia de seguridad?</mat-slide-toggle>
             <mat-slide-toggle class="me-4"  [(ngModel)]="busqueda.esta" (change)="filtro()" >Esta?</mat-slide-toggle>
             <button class="btn btn-outline-primary me-5" routerLink="/nuevo">Nuevo</button>
           </div>
@@ -30,7 +31,7 @@
                 <input type="text" class="form-control" name="clienteNombre" id="clienteNombre"
                   [(ngModel)]="busqueda.nombre" (input)="filtro()">
               </div>
-              <button class="btn btn-outline-success" type="submit">Buscar</button>
+              <button class="btn btn-outline-success ms-2" type="submit">Buscar</button>
             </form>
           </div>
         </div>
@@ -38,16 +39,17 @@
 
       <div class="d-flex flex-wrap justify-content-center cuerpo">
         <div class="card m-4" style="width: 20rem;" *ngFor="let elemento of returnedArray">
-          <img [src]="imagen(elemento.obj.caratula)" alt="Imagen" tooltip="{{elemento.obj.descrip}}" placement="right"
-            routerLink="/uno/{{elemento.obj.id}}">
-          <div class="badge bg-danger position-absolute top-0 start-0 rotate">{{elemento.obj.tipo}}</div>
-          <div *ngIf="!elemento.obj.esta"
+          <img [src]="imagen(elemento.caratula)" alt="Imagen" tooltip="{{elemento.descrip}}" placement="right"
+            routerLink="/uno/{{elemento.id}}">
+          <div class="badge bg-danger position-absolute top-0 start-0 rotate">{{elemento.tipo}}</div>
+          <div *ngIf="elemento.backup" class="badge bg-success position-absolute top-0 start-100"><span style='font-size:20px;'>&#11181;</span></div>
+          <div *ngIf="!elemento.esta"
             class="badge bg-danger position-absolute top-50 start-50 translate-middle fs-3">
             Falta
           </div>
           <div class="card-body">
-            <h5 class="card-title">{{ elemento.obj.nombre }}</h5>
-            <p class="card-text">{{ elemento.obj.obs }}</p>
+            <h5 class="card-title">{{ elemento.nombre }}</h5>
+            <p class="card-text">{{ elemento.obs }}</p>
           </div>
         </div>
       </div>

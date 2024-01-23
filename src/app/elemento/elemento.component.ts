@@ -20,7 +20,8 @@ export class ElementoComponent implements OnInit {
     obs: '',
     descrip: '',
     tipo: '',
-    esta: true
+    esta: true,
+    backup: ''
   };
 
   constructor(
@@ -29,40 +30,51 @@ export class ElementoComponent implements OnInit {
 
   ngOnInit(): void {
 
-    // Obtiene el valor de tipo desde otro componente
+    // Obtiene el valor de "tipo" desde otro componente
     this.elementosService.getTipo().subscribe((tipo) => {
       this.busqueda.tipo = tipo;
       this.filtro();
     });
   }
 
-  // Obtiene el total de objetos filtrados
+  // Obtiene el total de "elementos" filtrados
   filtro(): void {
     this.elementosService.filtro(this.busqueda).subscribe(
       data => {
         this.buscados = data;
-        this.buscados = this.buscados.map((obj: any, i: number) => ({ obj }));
+        //console.log(this.buscados.length);
+        //console.log(this.busqueda.backup);
+        
+
+        // Ordenar los objetos por el atributo "nombre"
+        this.buscados.sort((a: any, b: any) => a.nombre.localeCompare(b.nombre));
+        //console.log(this.buscados);
+
+        // Seleccionar los primeros 10 "elementos" después de la ordenación
         this.returnedArray = this.buscados.slice(0, 10);
+        //console.log(this.returnedArray);
       }
     );
   }
 
-  // Obtiene las imagenes de cada objeto
+  // Obtiene las imagenes de cada "elemento"
   imagen(imagenPath: String): String {
     return this.elementosService.imagen(imagenPath);
   }
 
-  // Muestra los objetos filtrados por "tipo"
+  // Muestra los "elementos" filtrados por "tipo"
   filtrarPorTipo(tipo: string): void {
     this.busqueda.tipo = tipo;
     this.filtro();
     this.currentPage = 1;
   }
 
-  // Cambia la pagina
+  // Cambia la pagina con los proximos 10 "elementos" ordenados
   pageChanged(event: PageChangedEvent): void {
     const startItem = (event.page - 1) * event.itemsPerPage;
     const endItem = event.page * event.itemsPerPage;
     this.returnedArray = this.buscados.slice(startItem, endItem);
+    //console.log(this.returnedArray);
+
   }
 }

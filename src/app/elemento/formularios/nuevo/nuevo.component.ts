@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ElementosService } from 'src/app/service/elementos.service';
 
@@ -7,7 +7,7 @@ import { ElementosService } from 'src/app/service/elementos.service';
   templateUrl: './nuevo.component.html',
   styleUrls: ['./nuevo.component.css']
 })
-export class NuevoComponent {
+export class NuevoComponent implements OnInit {
   nombre: string = '';
   obs: string = '';
   descrip: string = '';
@@ -15,18 +15,26 @@ export class NuevoComponent {
   esta: boolean = false;
   imagen: File | null = null;
 
+  buscados: any[] = [];
+
   constructor(
     private elementosService: ElementosService,
     private router: Router) { }
+  ngOnInit(): void {
+    this.todos();
+  }
 
   crearElemento(): void {
     if (this.nombre && this.obs && this.tipo && this.imagen) {
       this.elementosService.nuevo(this.nombre, this.obs, this.descrip, this.tipo, this.esta, this.imagen).subscribe(
+        () => {
+          // Después de agregar el nuevo elemento, realizar la navegación
+          this.router.navigate([`/uno/${this.buscados.length + 1}`]);
+        }
       );
     } else {
       console.error('Todos los campos son obligatorios.');
     }
-    this.irConTipo('');
   }
 
   onFileChange(event: any): void {
@@ -39,5 +47,13 @@ export class NuevoComponent {
   irConTipo(tipo: string): void {
     this.elementosService.setTipo(tipo);
     this.router.navigate(['/']);
+  }
+  todos(): any {
+    this.elementosService.lista().subscribe(
+      data => {
+        this.buscados = data;
+      }
+    );
+    return this.buscados
   }
 }

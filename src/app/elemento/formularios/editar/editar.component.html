@@ -39,15 +39,15 @@
               <textarea class="form-control" name="descripcion" id="descripcion" style="height: 100px"
                 [(ngModel)]="elemento.descrip"></textarea>
             </div>
-            <div class="row mt-3 d-flex justify-content-evenly">
+            <div class="row m-3 d-flex justify-content-evenly">
               <div class="col">
                 <div class="form-group">
-                  <input type="text" class="form-control" name="obs" id="obs" [(ngModel)]="elemento.obs" required>
+                  <input type="text" class="form-control" name="obs" id="obs" [(ngModel)]="elemento.obs" required placeholder="Ubicacion">
                 </div>
               </div>
               <div class="col">
                 <div class="form-group">
-                  <input type="text" class="form-control" name="cod" id="cod" [(ngModel)]="elemento.cod">
+                  <input type="text" class="form-control" name="cod" id="cod" [(ngModel)]="elemento.cod" placeholder="Codigo?">
                 </div>
               </div>
               <div class="col-3">
@@ -62,7 +62,7 @@
                 </div>
               </div>
               <div class="row">
-                <div class="col e">
+                <div class="col ">
                   <div class="btn-group d-flex justify-content-center m-2" role="group" aria-label="Basic checkbox toggle button group">
                     <input type="checkbox" class="btn-check" name="backup" id="backup" autocomplete="off"
                       [(ngModel)]="elemento.backup">

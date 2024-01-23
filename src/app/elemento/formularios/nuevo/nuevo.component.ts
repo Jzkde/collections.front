@@ -1,3 +1,4 @@
+import { ThisReceiver } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ElementosService } from 'src/app/service/elementos.service';
@@ -13,6 +14,8 @@ export class NuevoComponent implements OnInit {
   descrip: string = '';
   tipo: string = '';
   esta: boolean = false;
+  backup: string = '';
+  cod: string = '';
   imagen: File | null = null;
 
   buscados: any[] = [];
@@ -26,7 +29,7 @@ export class NuevoComponent implements OnInit {
 
   crearElemento(): void {
     if (this.nombre && this.obs && this.tipo && this.imagen) {
-      this.elementosService.nuevo(this.nombre, this.obs, this.descrip, this.tipo, this.esta, this.imagen).subscribe(
+      this.elementosService.nuevo(this.nombre, this.obs, this.descrip, this.tipo, this.esta, this.backup, this.cod, this.imagen ).subscribe(
         () => {
           // Después de agregar el nuevo elemento, realizar la navegación
           this.router.navigate([`/uno/${this.buscados.length + 1}`]);

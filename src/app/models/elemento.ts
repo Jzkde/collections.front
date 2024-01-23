@@ -5,7 +5,7 @@ export class elemento {
     obs: String;
     descrip: String;
     tipo: String;
-    cod: string
+    cod: String
     esta?: boolean;
     caratula: String;
     backup: String;

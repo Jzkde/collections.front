@@ -36,13 +36,15 @@ export class ElementosService {
     return this.apiUrl + `/${imagenPath}`;
   }
 
-  nuevo(nombre: string, obs: string, descrip: string, tipo: string, esta: boolean, imagen: File): Observable<string> {
+  nuevo(nombre: string, obs: string, descrip: string, tipo: string, esta: boolean, backup: string, cod: string, imagen: File): Observable<string> {
     const formData: FormData = new FormData();
     formData.append('nombre', nombre);
     formData.append('obs', obs);
     formData.append('descrip', descrip);
     formData.append('tipo', tipo);
     formData.append('esta', String(esta));
+    formData.append('backup', backup);
+    formData.append('cod', cod);
     formData.append('imagen', imagen);
     return this.http.post<string>(this.apiUrl + `/nuevo`, formData);
   }

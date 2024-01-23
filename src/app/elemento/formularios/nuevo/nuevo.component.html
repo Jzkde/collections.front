@@ -56,16 +56,24 @@
         </div>
         <div class="row mb-3">
           <div class="col">
-            <div class="form-group">
-              <label for="detalles">Detalles</label>
-              <input type="text" class="form-control" name="detalles" id="detalles" [(ngModel)]="obs" required>
+            <div class="form-group  d-flex justify-content-center m-2">
+              <input type="text" class="form-control me-1" name="detalles" id="detalles" [(ngModel)]="obs" required
+                placeholder="Ubicacion?">
+              <input type="text" class="form-control ms-1" name="detalles" id="detalles" [(ngModel)]="cod"
+                placeholder="Codigo?">
             </div>
           </div>
 
-          <div class="mt-2">
-            <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">
-              <input type="checkbox" class="btn-check" name="esta" id="esta" autocomplete="off" [(ngModel)]="esta">
-              <label class="btn btn-outline-primary" for="esta">Está?</label>
+          <div class="row">
+            <div class="col ">
+              <div class="btn-group d-flex justify-content-center m-2" role="group"
+                aria-label="Basic checkbox toggle button group">
+                <input type="checkbox" class="btn-check" name="backup" id="backup" autocomplete="off"
+                  [(ngModel)]="backup">
+                <label class="btn btn-outline-primary " for="backup">Backup?</label>
+                <input type="checkbox" class="btn-check" name="esta" id="esta" autocomplete="off" [(ngModel)]="esta">
+                <label class="btn btn-outline-primary " for="esta">Está?</label>
+              </div>
             </div>
           </div>
           <div>

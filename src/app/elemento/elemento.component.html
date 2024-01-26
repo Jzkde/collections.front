@@ -47,9 +47,9 @@
             class="badge bg-danger position-absolute top-50 start-50 translate-middle fs-3">
             Falta
           </div>
-          <div class="card-body">
-            <h5 class="card-title">{{ elemento.nombre }}</h5>
-            <p class="card-text">{{ elemento.obs }}</p>
+          <div class="card-body d-flex flex-column">
+            <h3 class="card-title align-self-center"><i>{{ elemento.nombre }} </i></h3>
+            <p class="card-text mt-auto">{{ elemento.obs }}  <span *ngIf="elemento.backup" class="card-text me-5">+ Disco Rigido</span> </p>
           </div>
         </div>
       </div>

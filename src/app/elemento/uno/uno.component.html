@@ -26,18 +26,25 @@
   <div class="">
     <div class="card m-4 " style="width: 40rem;">
       <h5 class="card-title text-center fs-1 m-4">{{ elemento.nombre }}</h5>
-      <img [src]="imagen(elemento.caratula)" alt="Imagen" >
+      <img [src]="imagen(elemento.caratula)" alt="Imagen">
+      <div *ngIf="elemento.borrado"
+        class="badge bg-danger position-absolute top-50 start-50 translate-middle fs-3 rotate">
+        Eliminado
+      </div>
       <div class="card-body">
         <div class="d-flex mb-3">
           <button class="btn btn-outline-primary p-2" routerLink="/editar/{{elemento.id}}" tooltip=""> Editar </button>
           <button class="btn btn-outline-primary ms-2 p-2" (click)="openModal(img)"> + Imagenes </button>
-          <button class="btn btn-outline-warning ms-auto p-2" (click)="openModal(delete)"> Borrar </button>
+          <button *ngIf="!elemento.borrado" class="btn btn-outline-warning ms-auto p-2" (click)="openModal(delete)">
+            Borrar </button>
+          <button *ngIf="elemento.borrado" class="btn btn-outline-warning ms-auto p-2" (click)="openModal(recuperar)">
+            Recuperar </button>
         </div>
       </div>
       <p class="card-text m-4">{{ elemento.descrip }}</p>
-      <div  class="d-flex justify-content-between">
+      <div class="d-flex justify-content-between">
         <p class="card-text ms-5">{{ elemento.obs }} <span *ngIf="elemento.backup">+ Disco Rigido</span></p>
-        <p  *ngIf="codigo" >|</p>
+        <p *ngIf="codigo">|</p>
         <p *ngIf="codigo" class="card-text me-5">Codigo: {{elemento.cod}}</p>
       </div>
     </div>
@@ -46,6 +53,14 @@
 <div class="d-flex justify-content-center m-4" *ngFor="let imagenes of elemento.imagenesPaths">
   <img [src]="imagen(imagenes)" alt="Imagen" style="max-width: 45rem;">
 </div>
+
+<ng-template #recuperar>
+  <div class="modal-body text-center">
+    <p>Estas seguro que deseas recuperar el elemento eliminado?</p>
+    <button type="button" class="btn btn-danger me-2" (click)="borrar(elemento.id!)">Si</button>
+    <button type="button" class="btn btn-primary" (click)="decline()">No</button>
+  </div>
+</ng-template>
 
 <ng-template #delete>
   <div class="modal-body text-center">

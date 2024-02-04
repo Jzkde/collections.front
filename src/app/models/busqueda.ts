@@ -6,4 +6,5 @@ export interface Busqueda {
     tipo: String;
     esta?: boolean;
     backup?: string;
+    borrado?: boolean;
 }

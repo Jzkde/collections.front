@@ -9,6 +9,7 @@ export class elemento {
     esta?: boolean;
     caratula: String;
     backup: String;
+    borrado?: String;
     imagenesPaths?: string[];
 
     constructor(
@@ -22,6 +23,7 @@ export class elemento {
         backup: String,
         id?: number,
         esta?: boolean,
+        borrado?: String,
         imagenesPaths?: string[],
     ) {
         this.nombre = nombre;

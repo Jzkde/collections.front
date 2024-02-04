@@ -21,7 +21,8 @@ export class ElementoComponent implements OnInit {
     descrip: '',
     tipo: '',
     esta: true,
-    backup: ''
+    backup: '',
+    borrado: false,
   };
 
   constructor(
